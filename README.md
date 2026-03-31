@@ -1,4 +1,4 @@
-# suivizotero
+# Suivi_Zotero
 Tableau de bord local pour suivre sa progression de lecture dans Zotero
 Suivi de lecture Zotero
 Un outil simple pour visualiser et suivre votre progression de lecture directement depuis votre bibliothèque Zotero.
