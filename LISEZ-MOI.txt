@@ -1,0 +1,61 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SUIVI DE LECTURE ZOTERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Cet outil affiche tous vos articles Zotero dans un tableau de bord
+dans votre navigateur, avec votre avancement de lecture.
+Il se met à jour automatiquement quand vous travaillez dans Zotero.
+
+
+╔══════════════════════════════════════╗
+║  VOUS ÊTES SUR MAC ?                 ║
+╚══════════════════════════════════════╝
+
+Étape 1 — Sur GitHub, cliquez sur le bouton vert "Code" puis "Download ZIP"
+          Décompressez ensuite le dossier téléchargé
+Étape 2 — Double-cliquez sur "Démarrer le suivi.command"
+          (La première fois : clic droit → Ouvrir → Ouvrir)
+Étape 3 — Une fenêtre noire s'ouvre, laissez-la ouverte
+Étape 4 — Dans Safari ou Chrome, tapez :  http://localhost:7777
+
+C'est tout !
+
+
+╔══════════════════════════════════════╗
+║  VOUS ÊTES SUR WINDOWS ?             ║
+╚══════════════════════════════════════╝
+
+⚠ Avant la première utilisation, il faut installer un logiciel
+  gratuit appelé Python. C'est comme installer Adobe Reader :
+  vous le faites une fois, et c'est terminé.
+
+─── Installation de Python (à faire une seule fois) ───────────
+
+  1. Allez sur :  https://www.python.org/downloads
+  2. Cliquez sur le gros bouton jaune "Download Python"
+  3. Ouvrez le fichier téléchargé
+  4. IMPORTANT : cochez la case "Add Python to PATH"
+     (tout en bas de la fenêtre d'installation)
+  5. Cliquez sur "Install Now"
+  6. Attendez que l'installation se termine, puis fermez
+
+─── Utilisation ────────────────────────────────────────────────
+
+  1. Sur GitHub, cliquez sur le bouton vert "Code" puis "Download ZIP"
+     Décompressez ensuite le dossier téléchargé
+  2. Double-cliquez sur "Démarrer le suivi.bat"
+  3. Une fenêtre noire s'ouvre, laissez-la ouverte
+  4. Dans Chrome ou Edge, tapez :  http://localhost:7777
+
+
+╔══════════════════════════════════════╗
+║  COMMENT ÇA MARCHE ?                 ║
+╚══════════════════════════════════════╝
+
+• Vos articles sont regroupés par collection Zotero
+• Les articles avec des annotations sont marqués "Lu" automatiquement
+• Cliquez sur le statut d'un article pour le changer :
+  À lire → En cours → Lu
+• Pour arrêter l'outil : fermez simplement la fenêtre noire
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
