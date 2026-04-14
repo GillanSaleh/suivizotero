@@ -3,20 +3,45 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Cet outil affiche tous vos articles Zotero dans un tableau de bord
-dans votre navigateur, avec votre avancement de lecture.
-Il se met à jour automatiquement quand vous travaillez dans Zotero.
+dans votre navigateur. Il se connecte à Zotero en temps réel et
+se met à jour automatiquement dès que vous travaillez dans Zotero.
+
+
+╔══════════════════════════════════════╗
+║  CE QUE FAIT L'OUTIL                 ║
+╚══════════════════════════════════════╝
+
+L'outil détecte automatiquement votre progression de lecture :
+
+  ✅ Lu        → vous avez ajouté le tag "lu" dans Zotero,
+                 ou vous avez cliqué sur le statut dans le tableau de bord
+
+  📖 En cours  → le PDF contient des annotations
+
+  👁 Consulté  → le PDF a été ouvert mais pas encore annoté
+                 (Mac uniquement — voir note Windows ci-dessous)
+
+  ⬜ À lire    → document jamais ouvert
+
+Autres fonctionnalités :
+  • Articles organisés par collection Zotero
+  • Barre de progression par article (page atteinte / total pages)
+  • Filtres par statut dans chaque collection
+  • Recherche par titre ou auteur
+  • Bouton "Tout marquer Lu" par collection
+  • Mise à jour en direct (point vert = connecté)
 
 
 ╔══════════════════════════════════════╗
 ║  VOUS ÊTES SUR MAC ?                 ║
 ╚══════════════════════════════════════╝
 
-Étape 1 — Sur GitHub, cliquez sur le bouton vert "Code" puis "Download ZIP"
-          Décompressez ensuite le dossier téléchargé
+Étape 1 — Sur GitHub, cliquez sur le bouton vert "Code"
+          puis "Download ZIP" et décompressez le dossier
 Étape 2 — Double-cliquez sur "Démarrer le suivi.command"
           (La première fois : clic droit → Ouvrir → Ouvrir)
 Étape 3 — Une fenêtre noire s'ouvre, laissez-la ouverte
-Étape 4 — Dans Safari ou Chrome, tapez :  http://localhost:7777
+Étape 4 — Votre navigateur s'ouvre automatiquement
 
 C'est tout !
 
@@ -25,37 +50,49 @@ C'est tout !
 ║  VOUS ÊTES SUR WINDOWS ?             ║
 ╚══════════════════════════════════════╝
 
-⚠ Avant la première utilisation, il faut installer un logiciel
-  gratuit appelé Python. C'est comme installer Adobe Reader :
+⚠ Avant la première utilisation, installez Python.
+  C'est un logiciel gratuit, comme Adobe Reader :
   vous le faites une fois, et c'est terminé.
 
 ─── Installation de Python (à faire une seule fois) ───────────
 
   1. Allez sur :  https://www.python.org/downloads
-  2. Cliquez sur le gros bouton jaune "Download Python"
+  2. Cliquez sur le gros bouton "Download Python"
   3. Ouvrez le fichier téléchargé
-  4. IMPORTANT : cochez la case "Add Python to PATH"
+  4. IMPORTANT : cochez "Add Python to PATH"
      (tout en bas de la fenêtre d'installation)
-  5. Cliquez sur "Install Now"
-  6. Attendez que l'installation se termine, puis fermez
+  5. Cliquez sur "Install Now" et attendez la fin
 
 ─── Utilisation ────────────────────────────────────────────────
 
-  1. Sur GitHub, cliquez sur le bouton vert "Code" puis "Download ZIP"
-     Décompressez ensuite le dossier téléchargé
+  1. Sur GitHub, cliquez sur le bouton vert "Code"
+     puis "Download ZIP" et décompressez le dossier
   2. Double-cliquez sur "Démarrer le suivi.bat"
   3. Une fenêtre noire s'ouvre, laissez-la ouverte
   4. Dans Chrome ou Edge, tapez :  http://localhost:7777
 
+  ⚠ Note Windows : la détection des documents "Consultés"
+    (ouverts sans annotation) n'est pas disponible sur Windows.
+    Ces documents resteront en "À lire" jusqu'à ce que vous les
+    annotiez ou changiez leur statut manuellement en cliquant.
+
 
 ╔══════════════════════════════════════╗
-║  COMMENT ÇA MARCHE ?                 ║
+║  MODIFIER UN STATUT MANUELLEMENT     ║
 ╚══════════════════════════════════════╝
 
-• Vos articles sont regroupés par collection Zotero
-• Les articles avec des annotations sont marqués "Lu" automatiquement
-• Cliquez sur le statut d'un article pour le changer :
-  À lire → En cours → Lu
-• Pour arrêter l'outil : fermez simplement la fenêtre noire
+Cliquez sur le bouton de statut d'un article pour le changer :
+
+  ⬜ À lire  →  👁 Consulté  →  📖 En cours  →  ✅ Lu
+
+Les changements sont sauvegardés automatiquement.
+
+
+╔══════════════════════════════════════╗
+║  PRÉREQUIS                           ║
+╚══════════════════════════════════════╝
+
+  • Zotero installé sur votre ordinateur
+  • Python 3 (déjà présent sur Mac — à installer sur Windows)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
