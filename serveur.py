@@ -8,15 +8,32 @@ import http.server, threading, json, time, shutil, sqlite3, queue, sys, tempfile
 from datetime import datetime
 from pathlib import Path
 
-# ── Claude API (optionnel) ────────────────────────────────────────────────────
+# ── IA : Groq (gratuit) ou Claude API ────────────────────────────────────────
+_ia_client  = None   # client actif
+_ia_backend = None   # "groq" ou "anthropic"
+
+# Groq (prioritaire — gratuit)
 try:
-    import anthropic as _anthropic_mod
-    _ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
-    _anthropic_client = _anthropic_mod.Anthropic(api_key=_ANTHROPIC_KEY) if _ANTHROPIC_KEY else None
-    _HAS_ANTHROPIC = bool(_ANTHROPIC_KEY)
+    from groq import Groq as _GroqClient
+    _GROQ_KEY = os.environ.get("GROQ_API_KEY", "")
+    if _GROQ_KEY:
+        _ia_client  = _GroqClient(api_key=_GROQ_KEY)
+        _ia_backend = "groq"
 except ImportError:
-    _anthropic_client = None
-    _HAS_ANTHROPIC = False
+    pass
+
+# Claude API (fallback si pas de clé Groq)
+if not _ia_client:
+    try:
+        import anthropic as _anthropic_mod
+        _ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+        if _ANTHROPIC_KEY:
+            _ia_client  = _anthropic_mod.Anthropic(api_key=_ANTHROPIC_KEY)
+            _ia_backend = "anthropic"
+    except ImportError:
+        pass
+
+_HAS_IA = _ia_client is not None
 
 ZOTERO_DB = Path.home() / "Zotero" / "zotero.sqlite"
 TEMP_DB   = Path(tempfile.gettempdir()) / "zotero_live.sqlite"
@@ -297,18 +314,18 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_error(404)
 
     def _serve_has_ia(self):
-        payload = json.dumps({"available": _HAS_ANTHROPIC})
+        payload = json.dumps({"available": _HAS_IA, "backend": _ia_backend})
         self.send_response(200)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.end_headers()
         self.wfile.write(payload.encode())
 
     def _serve_synthese_ia(self):
-        if not _HAS_ANTHROPIC:
+        if not _HAS_IA:
             self.send_response(503)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            msg = "anthropic non installé ou ANTHROPIC_API_KEY manquante"
+            msg = "Aucune clé IA configurée (GROQ_API_KEY ou ANTHROPIC_API_KEY)"
             self.wfile.write(json.dumps({"error": msg}).encode())
             return
 
@@ -365,15 +382,29 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
         try:
-            with _anthropic_client.messages.stream(
-                model="claude-opus-4-6",
-                max_tokens=4096,
-                messages=[{"role": "user", "content": prompt}]
-            ) as stream:
-                for text in stream.text_stream:
-                    data = json.dumps({"chunk": text}, ensure_ascii=False)
-                    self.wfile.write(f"data: {data}\n\n".encode("utf-8"))
-                    self.wfile.flush()
+            if _ia_backend == "groq":
+                stream = _ia_client.chat.completions.create(
+                    model="llama-3.3-70b-versatile",
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=4096,
+                    stream=True
+                )
+                for chunk in stream:
+                    text = chunk.choices[0].delta.content or ""
+                    if text:
+                        data = json.dumps({"chunk": text}, ensure_ascii=False)
+                        self.wfile.write(f"data: {data}\n\n".encode("utf-8"))
+                        self.wfile.flush()
+            else:  # anthropic
+                with _ia_client.messages.stream(
+                    model="claude-opus-4-6",
+                    max_tokens=4096,
+                    messages=[{"role": "user", "content": prompt}]
+                ) as stream:
+                    for text in stream.text_stream:
+                        data = json.dumps({"chunk": text}, ensure_ascii=False)
+                        self.wfile.write(f"data: {data}\n\n".encode("utf-8"))
+                        self.wfile.flush()
             self.wfile.write(b'data: {"done":true}\n\n')
             self.wfile.flush()
         except Exception as e:

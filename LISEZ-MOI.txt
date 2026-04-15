@@ -24,12 +24,15 @@ L'outil détecte automatiquement votre progression de lecture :
   ⬜ À lire    → document jamais ouvert
 
 Autres fonctionnalités :
-  • Articles organisés par collection Zotero
+  • Articles organisés par collection et sous-collection Zotero
   • Barre de progression par article (page atteinte / total pages)
   • Filtres par statut dans chaque collection
   • Recherche par titre ou auteur
   • Bouton "Tout marquer Lu" par collection
   • Mise à jour en direct (point vert = connecté)
+  • 📝 Synthèse classique : compilation de toutes vos annotations
+  • 🤖 Synthèse IA : synthèse rédigée par intelligence artificielle
+                    à partir de vos annotations et résumés
 
 
 ╔══════════════════════════════════════╗
@@ -89,10 +92,49 @@ Les changements sont sauvegardés automatiquement.
 
 
 ╔══════════════════════════════════════╗
+║  SYNTHÈSE IA (optionnel)             ║
+╚══════════════════════════════════════╝
+
+Le bouton 🤖 Synthèse IA génère une synthèse rédigée de vos
+articles lus, à partir de vos annotations et résumés.
+
+Pour l'activer, vous avez besoin d'une clé API gratuite :
+
+─── Obtenir une clé Groq (GRATUIT) ────────────────────────────
+
+  1. Allez sur :  console.groq.com
+  2. Créez un compte gratuit
+  3. Dans le menu à gauche → "API Keys" → "Create API Key"
+  4. Copiez la clé (commence par "gsk_...")
+
+─── Configurer la clé ──────────────────────────────────────────
+
+  Sur Mac :
+    1. Ouvrez le fichier "Démarrer le suivi.command" avec TextEdit
+       (clic droit → Ouvrir avec → TextEdit)
+    2. Remplacez COLLEZ_VOTRE_CLE_GROQ_ICI par votre clé
+    3. Sauvegardez et relancez l'outil
+
+  Sur Windows :
+    1. Ouvrez le fichier "Démarrer le suivi.bat" avec le Bloc-notes
+       (clic droit → Ouvrir avec → Bloc-notes)
+    2. Remplacez COLLEZ_VOTRE_CLE_GROQ_ICI par votre clé
+    3. Sauvegardez et relancez l'outil
+
+─── Utilisation ────────────────────────────────────────────────
+
+  1. Dans une collection, marquez des articles comme ✅ Lu
+  2. Cliquez sur le bouton violet 🤖 Synthèse IA
+  3. Une nouvelle fenêtre s'ouvre et la synthèse s'écrit
+     en temps réel, article par article
+
+
+╔══════════════════════════════════════╗
 ║  PRÉREQUIS                           ║
 ╚══════════════════════════════════════╝
 
   • Zotero installé sur votre ordinateur
   • Python 3 (déjà présent sur Mac — à installer sur Windows)
+  • Pour la Synthèse IA : une clé Groq gratuite (voir ci-dessus)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
